@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #8b008b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.feed-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Vertical lines on each side */
+.feed-container::before,
+.feed-container::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.feed-container::before {
+  left: calc(50% - 340px);
+}
+
+.feed-container::after {
+  right: calc(50% - 340px);
+}
+
+/* Gradient bands behind the feed */
+.feed-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  /* dark pink outer -> medium pink between lines -> bright pink center */
+  background: linear-gradient(
+    to right,
+    #8b008b 0%,
+    #8b008b calc(50% - 340px),
+    #c000c0 calc(50% - 340px),
+    #d630d6 calc(50% - 300px),
+    #ff00ff calc(50% - 300px),
+    #ff00ff calc(50% + 300px),
+    #d630d6 calc(50% + 300px),
+    #c000c0 calc(50% + 340px),
+    #8b008b calc(50% + 340px),
+    #8b008b 100%
+  );
+}
+
+.feed-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.feed-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.post-card {
+  background: #1e2028;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.post-card-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.post-card-body {
+  padding: 16px 20px 20px;
+}
+
+.post-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.post-card-date {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.post-card-caption {
+  font-size: 0.95rem;
+  color: #ddd;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-pill {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  color: #fff;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.loading-sentinel {
+  text-align: center;
+  padding: 32px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .feed-container {
+    padding: 16px 8px;
+  }
+
+  .post-card-body {
+    padding: 12px 16px 16px;
+  }
+}
