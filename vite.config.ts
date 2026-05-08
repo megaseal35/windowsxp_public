@@ -8,5 +8,12 @@ export default defineConfig({
   build: {
     outDir: "dist",
     minify: true,
+    cssMinify: "esbuild",
+  },
+  server: {
+    proxy: {
+      "/api": "http://localhost:3001",
+      "/uploads": "http://localhost:3001",
+    },
   },
 });

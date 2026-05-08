@@ -13,7 +13,7 @@ body {
 }
 
 .feed-container {
-  max-width: 600px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 24px 16px;
   position: relative;
@@ -34,11 +34,11 @@ body {
 }
 
 .feed-container::before {
-  left: calc(50% - 340px);
+  left: calc(50% - 590px);
 }
 
 .feed-container::after {
-  right: calc(50% - 340px);
+  right: calc(50% - 590px);
 }
 
 /* Gradient bands behind the feed */
@@ -50,20 +50,81 @@ body {
   bottom: 0;
   pointer-events: none;
   z-index: 0;
-  /* dark pink outer -> medium pink between lines -> bright pink center */
+  /* dark pink outside lines, gradient between lines and cards, bright pink at cards */
   background: linear-gradient(
     to right,
     #8b008b 0%,
-    #8b008b calc(50% - 340px),
-    #c000c0 calc(50% - 340px),
-    #d630d6 calc(50% - 300px),
-    #ff00ff calc(50% - 300px),
-    #ff00ff calc(50% + 300px),
-    #d630d6 calc(50% + 300px),
-    #c000c0 calc(50% + 340px),
-    #8b008b calc(50% + 340px),
+    #8b008b calc(50% - 590px),
+    #8b008b calc(50% - 588px),
+    #ff00ff calc(50% - 555px),
+    #ff00ff calc(50% + 555px),
+    #8b008b calc(50% + 588px),
+    #8b008b calc(50% + 590px),
     #8b008b 100%
   );
+}
+/* Neutral, Windows-Explorer-style card: light surfaces, dark text. */
+.glass-borders {
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #d9d6cd;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+    padding: 0;
+    margin: 9px auto 9px auto;
+}
+.aero-header {
+    /* Light header strip like an Explorer pane heading. */
+    background: linear-gradient(to bottom, #fdfdfd 0, #ececec 100%);
+    border-bottom: 1px solid #c8c4bb;
+    padding: 4px 8px 6px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 970px;
+    font-weight: 400;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif, Arial, Helvetica, sans-serif;
+    margin: 0;
+    position: relative;
+    color: #1a1a1a;
+    text-shadow: none;
+    font-size: 0.95rem;
+}
+
+.aero-header h2,
+.aero-header .aero-header {
+    color: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    margin: 0;
+}
+.styled-containers {
+    background: #ffffff;
+    padding: 12px 14px 14px 14px;
+    max-width: 935px;
+    color: #222;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+.aero-borders {
+    border: 1px solid #d9d6cd;
+}
+
+/* Masonry grid */
+.masonry-grid {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.masonry-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Explorer-style content pane behind the cards. */
+.post-feed-scroll {
+  background: #f3f2f0;
 }
 
 .feed-header {
@@ -78,72 +139,142 @@ body {
 }
 
 .post-card {
-  background: #1e2028;
-  border-radius: 12px;
+  content-visibility: auto;
   overflow: hidden;
   margin-bottom: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .post-card-image {
   width: 100%;
   display: block;
-  aspect-ratio: 1;
   object-fit: cover;
 }
 
 .post-card-body {
-  padding: 16px 20px 20px;
+  padding: 12px 14px 14px;
 }
 
 .post-card-title {
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  text-shadow: none;
 }
 
 .post-card-date {
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-bottom: 10px;
+  font-size: 0.7rem;
+  color: #666;
+  margin-bottom: 8px;
 }
 
 .post-card-caption {
-  font-size: 0.95rem;
-  color: #ddd;
-  margin-bottom: 14px;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.45;
+  white-space: pre-wrap;
 }
 
-.post-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-pill {
-  font-size: 0.75rem;
-  padding: 4px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  color: #fff;
+.post-card-title-input,
+.post-card-caption-input {
   background: transparent;
-  white-space: nowrap;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-shadow: inherit;
+}
+
+.post-card-title-input:focus,
+.post-card-caption-input:focus {
+  outline: 1px dashed rgba(0, 0, 0, 0.3);
+  outline-offset: 2px;
+}
+
+.post-card-caption-input {
+  resize: vertical;
+  min-height: 3.5em;
+}
+
+.post-card-title-input::placeholder,
+.post-card-caption-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  text-shadow: none;
+}
+
+/* --- Rich-text editor (TipTap) surface ---
+   The editor lives inside the blog's aero/CRT containers, which force light
+   text, strip list markers, etc. Reset those to a plain "document" look so
+   text is dark-on-white, lists show markers, and alignment is visible. */
+.post-editor-toolbar {
+  color: #000;            /* toolbar glyphs (A, H, selects) on the light ribbon */
+}
+
+.post-editor-content {
+  color: #1a1a1a;         /* override inherited light theme text color */
+  text-shadow: none;
+}
+
+.post-editor-content .ProseMirror {
+  min-height: 150px;
+  outline: none;
+  line-height: 1.5;
+}
+
+.post-editor-content .ProseMirror p {
+  margin: 0 0 0.5em;
+}
+
+.post-editor-content .ProseMirror h1 { font-size: 1.8em; font-weight: 700; margin: 0.4em 0; }
+.post-editor-content .ProseMirror h2 { font-size: 1.4em; font-weight: 700; margin: 0.4em 0; }
+.post-editor-content .ProseMirror h3 { font-size: 1.15em; font-weight: 700; margin: 0.4em 0; }
+
+/* Restore list markers/indentation that the global `ul,ol{list-style:none}`
+   reset removes — for both the editor AND the rendered post in the feed
+   (both mount a .ProseMirror inside .styled-containers). */
+.styled-containers .ProseMirror ul { list-style: disc; padding-left: 1.6em; margin: 0 0 0.5em; }
+.styled-containers .ProseMirror ol { list-style: decimal; padding-left: 1.6em; margin: 0 0 0.5em; }
+.styled-containers .ProseMirror li { margin: 0.1em 0; }
+
+.styled-containers .ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-dialog-errors {
+  list-style: none;
+  padding: 6px 8px;
+  margin: 8px 0 0;
+  background: rgba(120, 20, 20, 0.35);
+  border: 1px solid rgba(255, 80, 80, 0.5);
+  color: #ffd0d0;
+  font-size: 0.8rem;
 }
 
 .loading-sentinel {
   text-align: center;
   padding: 32px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(0, 0, 0, 0.55);
   font-size: 0.9rem;
 }
 
-@media (max-width: 640px) {
-  .feed-container {
-    padding: 16px 8px;
+@media (max-width: 900px) {
+  .masonry-column:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .masonry-column:nth-child(2),
+  .masonry-column:nth-child(3) {
+    display: none;
   }
 
-  .post-card-body {
-    padding: 12px 16px 16px;
+  .feed-container {
+    padding: 16px 8px;
   }
 }

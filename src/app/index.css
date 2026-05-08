@@ -1,0 +1,279 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: Tahoma, "Trebuchet MS", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-icon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  margin: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.desktop-icon-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.desktop-icon-emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.desktop-icon-label {
+  margin-top: 4px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+  text-align: center;
+  word-break: break-word;
+}
+
+.explorer-window {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  background: #fff;
+}
+
+.explorer-tree {
+  width: 180px;
+  overflow: auto;
+  padding: 6px;
+  border-right: 1px solid #aca899;
+  background: #fff;
+  box-sizing: border-box;
+  align-self: stretch;
+}
+
+.explorer-tree ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.explorer-tree .tree-children {
+  padding-left: 14px;
+}
+
+.explorer-tree .tree-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  line-height: 18px;
+}
+
+.explorer-tree .tree-toggle {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+  user-select: none;
+}
+
+.explorer-tree .tree-label {
+  cursor: pointer;
+  padding: 1px 4px;
+  color: #000;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.explorer-tree .tree-label.selected {
+  background: #316ac5;
+  color: #fff;
+}
+
+.explorer-tree .tree-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.explorer-tree .tree-icon-emoji {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.explorer-files {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+}
+
+.explorer-tile {
+  position: static !important;
+}
+
+.explorer-tile .desktop-icon-label {
+  color: #000;
+  text-shadow: none;
+}
+
+.explorer-tile.selected .desktop-icon-label {
+  background: #316ac5;
+  color: #fff;
+}
+
+.blog-body {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;        /* scroll inside the window when content is tall */
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.blog-image {
+  max-width: 100%;
+  height: auto;
+  align-self: center;
+  border: 1px solid #999;
+}
+
+.blog-meta {
+  font-size: 11px;
+  color: #555;
+}
+
+.blog-caption {
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;   /* preserve newlines from the scraped caption */
+  margin: 0;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.blog-tag {
+  background: #ece9d8;     /* XP control-panel tan */
+  border: 1px solid #aca899;
+  padding: 1px 5px;
+}
+
+.xp-desktop {
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("/public/desktop/goddess-2.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+
+  /* Default cursor for the whole desktop and any descendant
+     that doesn't override it. The `auto` fallback is required —
+     used if the .cur file fails to load. */
+  cursor: url("/icons/Normal_Select.cur"), auto;
+}
+
+/* Pointer cursor for anything clickable inside the XP desktop.
+   Scoped to .xp-desktop so the feed page is unaffected. */
+.xp-desktop a,
+.xp-desktop button,
+.xp-desktop [role="button"],
+.xp-desktop .desktop-icon,
+.xp-desktop .title-bar,
+.xp-desktop .title-bar-controls button {
+  cursor: url("/icons/Link_Select.cur"), pointer;
+}
+
+/* Age-gate modal: centers an XP.css .window on a dimmed backdrop. */
+.age-gate-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Above any open Rnd window (z-indexes there grow from 0; pick something safely high). */
+  z-index: 10000;
+}
+
+.age-gate-window {
+  width: min(420px, 90vw);
+}
+
+.age-gate-window .window-body {
+  color: #000;
+}
+
+.age-gate-window .window-body p {
+  margin: 8px 0 16px 0;
+  line-height: 1.4;
+  color: #000;
+}
+
+.ext-link-url {
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid #aca899;
+  padding: 4px 6px;
+  word-break: break-all;
+  user-select: all;
+}
+
+/* Busy.ani — Windows animated cursors are NOT supported by browsers as
+   CSS cursors. Convert it to a static .cur (e.g. Busy.cur) or an animated
+   GIF (limited support) and re-enable, e.g.:
+   .xp-desktop.is-busy { cursor: url("/icons/Busy.cur"), wait; }
+*/

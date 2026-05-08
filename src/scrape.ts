@@ -23,7 +23,7 @@ interface ImageEntry {
 
 interface Post {
   title: string;
-  date: string;
+  createdAt: string;
   imageUrl: string;
   images: ImageEntry[];
   caption: string;
@@ -52,7 +52,6 @@ function getExtFromUrl(url: string): string {
 }
 
 function cleanImageUrl(url: string): string {
-  // Strip ssl=1 param which causes 400s on some images
   return url.replace(/[&?]ssl=1/g, "").replace(/\?$/, "");
 }
 
@@ -91,7 +90,7 @@ function extractPostsFromPage($: cheerio.CheerioAPI): Post[] {
     const title = article.find("h2.entry-title a").text().trim();
     if (!title) return;
 
-    const date =
+    const createdAt =
       article.find("time.entry-date.published").attr("datetime") || "";
 
     const imgEl = article.find("a.post-thumbnail img.wp-post-image");
@@ -129,7 +128,7 @@ function extractPostsFromPage($: cheerio.CheerioAPI): Post[] {
       });
     }
 
-    posts.push({ title, date, imageUrl, images, caption, tags });
+    posts.push({ title, createdAt, imageUrl, images, caption, tags });
   });
 
   return posts;
